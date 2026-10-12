@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "package": "pl.ratrynek.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["NetHandlerMixin"],
+  "injectors": { "defaultRequire": 1 }
+}
