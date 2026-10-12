@@ -6,6 +6,19 @@ version = project.mod_version
 group = 'pl.ratrynek'
 base { archivesName = 'ratrynek' }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['.']
+            include '*.java'
+        }
+        resources {
+            srcDirs = ['.']
+            include 'fabric.mod.json', 'ratrynek.mixins.json'
+        }
+    }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -16,6 +29,7 @@ dependencies {
 processResources {
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") { expand "version": project.version }
+    from('en_us.json') { into 'assets/ratrynek/lang' }
 }
 
 tasks.withType(JavaCompile).configureEach { it.options.release = 21 }
