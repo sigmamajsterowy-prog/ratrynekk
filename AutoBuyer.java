@@ -2,8 +2,9 @@ package pl.ratrynek;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
+import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LoreComponent;
 import net.minecraft.item.Item;
@@ -49,7 +50,7 @@ public class AutoBuyer {
             return;
         }
 
-        if (!(s instanceof HandledScreen<?>) || s instanceof AbstractInventoryScreen<?>) return;
+        if (!(s instanceof HandledScreen<?>) || (s instanceof InventoryScreen || s instanceof CreativeInventoryScreen)) return;
 
         if (scan(mc)) return;
         // rynek otwarty a nic nie pasuje -> zamknij, zeby komenda otworzyla swiezy
@@ -63,7 +64,7 @@ public class AutoBuyer {
         Config c = Config.get();
         if (!c.enabled || mc.player == null || mc.interactionManager == null) return false;
         Screen s = mc.currentScreen;
-        if (!(s instanceof HandledScreen<?> hs) || s instanceof AbstractInventoryScreen<?>) return false;
+        if (!(s instanceof HandledScreen<?> hs) || (s instanceof InventoryScreen || s instanceof CreativeInventoryScreen)) return false;
 
         long now = System.currentTimeMillis();
         if (s != lastScreen) { lastScreen = s; screenOpenedAt = now; }
